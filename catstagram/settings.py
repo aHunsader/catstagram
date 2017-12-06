@@ -31,7 +31,7 @@ AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
 
-DEFAULT_FILE_STORAGE = 'mysite.storage_backends.MediaStorage'
+DEFAULT_FILE_STORAGE = 'catstagram.storage_backends.MediaStorage'
 
 
 # Quick-start development settings - unsuitable for production
