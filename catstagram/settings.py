@@ -31,7 +31,7 @@ AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
 
-DEFAULT_FILE_STORAGE = 'filler'
+DEFAULT_FILE_STORAGE = 'mysite.storage_backends.MediaStorage'
 
 
 # Quick-start development settings - unsuitable for production
@@ -41,9 +41,9 @@ DEFAULT_FILE_STORAGE = 'filler'
 SECRET_KEY = 'filler'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['fierce-garden-66987.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
