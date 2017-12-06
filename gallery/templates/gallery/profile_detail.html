@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block javascript %}
+{% load static %}
+<script src="{% static 'javascript/crop_images.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<style>
+.cropper-crop-box, .cropper-view-box{
+  border-radius: 50%;
+}
+.cropper-view-box{
+  box-shadow: 0 0 0 1px #39f;
+  outline: 0;
+}
+</style>
+
+	<div class="container">
+		<div class="col-sm-4">
+			{% if correct_member and member.default %}
+			<form method="post" enctype="multipart/form-data" id="formUpload" class="well" style="margin-top: 100px;">
+				{% csrf_token %}
+				{{ profPic_form }}
+			</form>
+			<style>
+			label[for='id_profile_pic']{
+				color: #757670;
+			}
+			</style>
+			{% elif not member.default %}
+				<img class="img-responsive img-circle profile" src="{{member.profile_pic.url}}">
+			{% else %}
+				<img class="img-responsive img-circle profile" src="{% static 'pictures/idk.jpg' %}"/>
+			{% endif %}
+		</div>
+		<div class="col-sm-8">
+			<h2>{{member.username}}</h2>
+			<p><span class="glyphicon glyphicon-sort score"></span> {{total_votes}} <span class="glyphicon glyphicon-triangle-top score" style="color: green;"></span> {{upvotes}} <span class="glyphicon glyphicon-triangle-bottom score" style="color: red;"></span> {{downvotes}}</p>
+			{% if member.bio != "" %}
+				<p>{{member.bio}}</p>
+			{% elif correct_member %}
+				<form method="post">
+					{% csrf_token %}
+					{{ bio_form.as_p }}
+					<button class="btn btn-default purple" type="submit">Add Bio</button>
+				</form>
+
+				<style>
+					textarea.bio{
+						resize: none;
+					}
+				</style>
+			{% endif %}
+			
+			<style>
+				.score{
+					font-size: 20px;
+				}
+			</style>
+		</div>
+	</div>
+
+	<h3>Posts</h3>
+
+	<div class="infinite-container">
+		{% for photo in images %}
+			{% if forloop.first %}
+				<div class="row infinite-item">
+			{% elif forloop.counter0|divisibleby:4 %}
+				</div><div class="row infinite-item">
+			{% endif %}
+				<div class="col-sm-3"><img id ="{{ photo.pk }}" class="img-responsive post" src="{{photo.image.url}}" /></div>
+		{% endfor %}
+			</div>
+		<style>
+		.row{
+			margin-right: 15px;
+			margin-left: 15px;
+			margin-bottom: 30px;
+		}
+		.post{
+			border: 5px solid #736BA3;
+			border-radius: 25px;
+		}
+		.purple{
+  			width: 80px;
+		}
+		.purple.js-crop-and-upload{
+  			width: 150px;
+  		}
+		 .modal-dialog, .modal-content {
+		      height: 96%;
+		 }
+		 .modal-body {
+		      max-height: calc(100% - 120px) !important;
+		      overflow: scroll !important;
+		 }
+		 #modalCrop{
+    		z-index: 9999;
+  		}
+		</style>
+	</div>
+
+	{% if images.has_next %}
+		<a class="infinite-more-link" href="?page={{ images.next_page_number }}"></a>
+	{% endif %}
+
+	<div class="modal fade" id="modalCrop" data-backdrop="static">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">Crop your profile picture</h4>
+        </div>
+        <div class="modal-body">
+          <img src="" class="" id="image" style="">
+        </div>
+        <div class="modal-footer">
+          <div class="btn-group pull-left" role="group">
+            <button type="button" class="btn btn-default js-zoom-in">
+              <span class="glyphicon glyphicon-zoom-in"></span>
+            </button>
+            <button type="button" class="btn btn-default js-zoom-out">
+              <span class="glyphicon glyphicon-zoom-out"></span>
+            </button>
+          </div>
+          <button type="button" class="btn btn-primary js-crop-and-upload purple">Crop and Upload</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}

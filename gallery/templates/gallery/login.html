@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row three">	
+	<div class="col-sm-4 third first">
+		<h3 class="login" style="text-align: left;">Log in</h3>
+			<form method="post" id="theFormID">
+				{% csrf_token %}
+				{{ login_form.as_p }}
+				<button class="btn btn-default purple" type="submit">Log in</button>
+			</form>
+	</div>
+
+	<div class="col-sm-4 third">
+			<h3 class="login" style="text-align: left;">Sign up</h3>
+			<form method="post">
+				{% csrf_token %}
+				{{ signup_form.as_p }}
+				<button class="btn btn-default purple" type="submit">Sign up</button>
+			</form>
+	</div>
+
+	<div class="col-sm-4 third last">
+			<blockquote class="blockquote">
+  				<p class="mb-0">I spent many days on [Catstagram].</p>
+  				<footer class="blockquote-footer">Alex Hunsader (while creating Catstagram)</footer>
+			</blockquote>
+			<blockquote class="blockquote">
+  				<p class="mb-0">[Catstagram] looks like the website for a pet adoption agency.</p>
+  				<footer class="blockquote-footer">Teyva Chee</footer>
+			</blockquote>
+			<blockquote class="blockquote">
+  				<p class="mb-0">Even I prefer [Catstagram] to Instagram --- wait this won't be cited right?</p>
+  				<footer class="blockquote-footer">Kevin Systrom (CEO of Instagram)</footer>
+			</blockquote>
+			<blockquote class="blockquote">
+  				<p class="mb-0">What're we talking about again? Yeah sure [Catstagram] is good or whatever.</p>
+  				<footer class="blockquote-footer">Anonymous UCLA student</footer>
+			</blockquote>
+		</div>
+</div>
+	<style>
+	.third{
+		text-align: center;
+		padding: 20px;
+		padding-top: 0px;
+	}
+	.row.three {
+    display: flex;
+    flex-wrap: wrap;
+	}
+	.row.three > [class*='col-'] {
+    	display: flex;
+    	flex-direction: column;
+	}
+
+	.first{
+		border-right: solid 2px #736BA3;
+		border-height: 90%;
+	}
+	.last{
+		border-left: solid 2px #736BA3;
+		font-size: 18px;
+	}
+
+	</style>
+
+{% endblock %}

@@ -1,0 +1,81 @@
+.navigation-bar{
+	background-color: #AEA7CF;
+	position: fixed;
+	overflow: hidden;
+	top: 0;
+	z-index: 9000;
+}
+.main{
+	margin-top: 125px;
+}
+
+img.logo{
+	height: 65px;
+	width: auto;
+	border-radius: 10px;
+	border: 2px solid #fff;
+	margin: 10px;
+	display: inline-block;
+}
+img.post, img.overlay-pic, img.like{
+	cursor: pointer;
+}
+table {
+	margin-bottom: 10px;
+}
+.link{
+	color: white;
+	font-size: 30px;
+	margin: 20px;
+}
+h3{
+	color: white;
+	display: inline-block;
+}
+h3.login{
+	color: black;
+}
+div.logo{
+	display: inline-block;
+}
+a:hover {
+	text-decoration: none;
+	color: #583668;
+}
+td{
+	margin-right:10px;
+	margin-left:10px;
+	display: inline-block;
+}
+input.searchbar, div.searchbar{
+	width: 300px;
+	text-align: left;
+}
+td.searchbar{
+	position: absolute;
+	top: 50%;
+}
+i.searchbar{
+	position: absolute;
+
+}
+.overlay-outer {
+	position: relative;
+}
+.overlay-pic {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	margin-left: -200px;
+	height: 400px;
+	width: 400px;
+}
+a{
+	color: #736BA3;
+}
+.purple{
+	background-color: #AEA7CF;
+	color: white;
+	width: 100%;
+}

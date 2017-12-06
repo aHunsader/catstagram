@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+	<h1>Members</h1>
+
+	
+		<div class="container">
+			<table class="table">
+				{% if profile_list %}
+				<tbody class="infinite-container">
+				{% for member in profile_list %}
+					<tr class="infinite-item">
+						<td class="col-sm-4">
+							{% load static %}
+							{% if not member.default %}
+								<img class="img-responsive profile" src="{{member.profile_pic.url}}">
+							{% else %}
+								<img class="img-responsive profile" src="{% static 'pictures/idk.jpg' %}">
+							{% endif %}
+						</td>
+						<td class="col-sm-4 username"><a href="{{ member.get_absolute_url}}">{{member.username}}</a></td>
+						<td class="col-sm-4">{{member.bio}}</td>
+						<style>
+						img.profile{
+							display: block;
+							width: 100%;
+							border-radius: 25px;
+						}
+						tr.well{
+							border-radius: 25px;
+						}
+						.username{
+							text-align: center;
+						}
+						</style>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+			{% else %}
+			<p>There are no users to show.</p>	
+			{% endif %}
+		</div>	
+		
+
+	{% if page_obj.has_next %}
+		<a class="infinite-more-link" href="?page={{ page_obj.next_page_number }}"></a>
+	{% endif %}
+
+	
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+	<div class="infinite-container">
+		{% for photo in images %}
+			{% if forloop.first %}
+				<div class="row infinite-item">
+			{% elif forloop.counter0|divisibleby:4 %}
+				</div><div class="row infinite-item">
+			{% endif %}
+				<div class="col-sm-3"><img id ="{{ photo.pk }}" class="img-responsive post" src="{{photo.image.url}}" /></div>
+		{% endfor %}
+			</div>
+		<style>
+		.row{
+			margin-right: 15px;
+			margin-left: 15px;
+			margin-bottom: 30px;
+		}
+		.post{
+			border: 5px solid #736BA3;
+			border-radius: 25px;
+		}
+		</style>
+
+	</div>
+
+
+
+	{% if images.has_next %}
+		<a class="infinite-more-link" href="?page={{ images.next_page_number }}"></a>
+	{% endif %}
+
+{% endblock %}

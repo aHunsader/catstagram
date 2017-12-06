@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+	{% for member in results %}
+		<div class="row">
+			<div class="col-sm-3"><img class="img-responsive profile" src="{{member.profile_pic.url}}"></div>
+			<div class="col-sm-8">
+				<p><a href="{{ member.get_absolute_url }}">{{member.username}}</a></p>
+				<p>{{member.bio}}</p>
+			</div>
+		</div>
+	{% endfor %}
+
+{% endblock %}

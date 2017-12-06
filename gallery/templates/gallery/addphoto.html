@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block javascript %}
+{% load static %}
+  <script src="{% static 'javascript/crop_images.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+
+  <h1 class="page-header">Add a picture</h1>
+
+  <form method="post" enctype="multipart/form-data" id="formUpload" style="margin: 20px;">
+    {% csrf_token %}
+    {% for field in form %}
+      {% if field.auto_id == "id_image" %}
+        <div class="well">
+          <p style="color: gray;">Add an image:</p>
+      {% endif %}
+      {{ field }}
+    {% endfor %}
+        </div>
+  </form>
+  <style>
+  .btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file].keep {
+    position: absolute;
+    top: 0;
+    font-size: 100px;
+    text-align: left;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+}
+.purple{
+  width: 80px;
+}
+.purple.js-crop-and-upload{
+  width: 150px;
+}
+</style>
+
+  <style>
+    textarea.caption-form{
+      resize: none;
+    }
+  </style>
+
+<style class="black-white"></style>
+
+
+  <div class="modal fade" id="modalCrop" data-backdrop="static">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">Crop the photo</h4>
+        </div>
+        <div class="modal-body">
+          <img src="" class="" id="image" style="">
+        </div>
+        <div class="modal-footer">
+          <div class="btn-group pull-left" role="group">
+            <button type="button" class="btn btn-default js-zoom-in">
+              <span class="glyphicon glyphicon-zoom-in"></span>
+            </button>
+            <button type="button" class="btn btn-default js-zoom-out">
+              <span class="glyphicon glyphicon-zoom-out"></span>
+            </button>
+          </div>
+          <button type="button" class="btn btn-default black-white">Black and White</button>
+          <button type="button" class="btn btn-primary js-crop-and-upload purple">Crop and Upload</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<style>
+  #modalCrop{
+    z-index: 9999;
+  }
+  .modal-dialog, .modal-content {
+      height: 96%;
+  }
+  .modal-body {
+      max-height: calc(100% - 120px) !important;
+      overflow: scroll !important;
+  }
+</style>
+
+{% endblock %}
