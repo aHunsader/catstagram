@@ -58,7 +58,7 @@ class PictureForm(forms.ModelForm):
         h = self.cleaned_data.get('height')
 
         file = Image.open(photo.image)
-        fh = storage.open(photo.image.name, "w")
+        fh = storage.open(photo.image.name, "wb")
         file = file if not picFilter else file.convert('L')
         cropped_image = file.crop((x, y, w+x, h+y))
         resized_image = cropped_image.resize((400, 400), Image.ANTIALIAS)
@@ -97,7 +97,7 @@ class ProfilePicForm(forms.ModelForm):
         h = self.cleaned_data.get('height')
 
         file = Image.open(current_user.profile_pic)
-        fh = storage.open(current_user.profile_pic.name, "w")
+        fh = storage.open(current_user.profile_pic.name, "wb")
         cropped_image = file.crop((x, y, w+x, h+y))
         resized_image = cropped_image.resize((400, 400), Image.ANTIALIAS)
         resized_image.save(fh, 'png')
